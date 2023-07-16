@@ -9,7 +9,7 @@ function UserProfile() {
         window.location.href = '/'
     }
   return (
-    <div>userProfile</div>
+    <div></div>
   )
 }
 

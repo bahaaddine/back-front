@@ -7,19 +7,22 @@ const bcrypt = require('bcryptjs');
 
 
 exports.addUser = async (req,res) =>{
-    const {email,password,role} = req.body;
+    const {firstname,lastname,email,password,role} = req.body;
     try {
-        const userExist = await userSchema.findOne({email:email});
+        console.log('1')
+        const userExist = await userSchema.findOne({email:email}); 
+        console.log('2')
+
         if(userExist){
             return res.status(400).send({msg:'User exist'});
-        }
+        } 
+        console.log('3')
         const user = new userSchema(req.body);
         const passwordHashed = bcrypt.hashSync(password,10);
         user.password = passwordHashed;
-       
+        console.log('4')
         const userRole = await roleSchema.findOne({roleName:'user'});
         user.role = userRole._id
-        
         const token = jwt.sign({id:user._id},process.env.passwordToken);
         await user.save();
         return res.status(200).send({msg:'User added successfully',token})

@@ -6,7 +6,7 @@ const {addUser,login,getUsers,getOneUser,deleteOneUser,updateOneUser} = require(
 const { isAuth } = require('../middlewares/isAuth');
 const {validation,loginValidation,registerValidation} = require('../middlewares/validator')
 userRouter.get('/',getUsers)
-userRouter.post('/addUser',registerValidation,validation,addUser)
+userRouter.post('/addUser',registerValidation,addUser)
 userRouter.get('/current',isAuth,async(req,res)=>res.send({user:req.user}))
 userRouter.post('login',loginValidation,validation,login)
 userRouter.get('/:id',getOneUser)
