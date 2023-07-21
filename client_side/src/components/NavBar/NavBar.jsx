@@ -23,7 +23,7 @@ function Dashboard() {
 
     const loadEmployeeDetail = async () =>  
     {
-      var response = fetch('http://localhost:4000/api/Article')
+      var response = fetch('http://localhost:4000/articles')
          .then(function(response){
             return response.json();
           })
@@ -39,7 +39,7 @@ function Dashboard() {
     const submitEmployeeRecord = async (e) => {
         e.preventDefault();
         e.target.reset();
-        await axios.post("http://localhost:4000/api/Article",article);
+        await axios.post("http://localhost:4000/articles",article);
         alert('Data Inserted');
          
         loadEmployeeDetail();
@@ -54,7 +54,7 @@ function Dashboard() {
     }
     const deleteRecord = (ArticleId) =>
     {
-      axios.delete(`http://localhost:4000/api/Article/${ArticleId}`)
+      axios.delete(`http://localhost:4000/Article/${ArticleId}`)
       .then((result)=>{
         loadEmployeeDetail();
       })
@@ -81,14 +81,6 @@ function Dashboard() {
                    <input type="number" class="form-control  mb-4" name="badgeNumber" value={badgeNumber} onChange={e => onInputChange(e)} placeholder="BadgeNumber"></input>
                 </div>
                 <div class="form-group">
-                <label for="startDate">Starting Date:</label>
-                <input type="date" id="startDate" name="startDate" required=""></input>
-                </div>
-                <div class="form-group">
-                <label for="startDate">Ending Date:</label>
-                <input type="date" id="startDate" name="startDate" required=""></input>
-                </div>
-                <div class="form-group">
                    <input type="text" class="form-control  mb-4" name="nom"  value={nom} onChange={e => onInputChange(e)} placeholder="Nom" />
                 </div>
      
@@ -106,20 +98,8 @@ function Dashboard() {
                 <div class="form-group">
                    <input type="number" class="form-control mb-4" name="cin" value={cin} onChange={e => onInputChange(e)} placeholder="CIN" />
                 </div>
-                <div class="form-group">
-                <label for="birthdate">Birthdate:</label>
-                <input type="date" id="birthdate" name="birthdate" required=""></input>
-                </div>
-                <br />
-                <div class="form-group">
-                <label for="zone">Zone:</label>
-                <select id="zone" name="zone">
-              <option value="" selected="" disabled="">Choisir une zone</option>
-              <option value="A">A</option>
-              <option value="B">B</option>
-              <option value="C">C</option>
-            </select>
-                </div> 
+            
+                <br /> 
                 <br />
 
                
@@ -137,7 +117,7 @@ function Dashboard() {
             { record.map((name)=>
                 <tr>
                 <td>{name._id}</td>
-                <td>{name.image}</td>
+                <td>{name.cin}</td>
                 <td>{name.nom}</td>
                 <td>{name.prenom}</td>
                 <td>{name.fonction}</td>
